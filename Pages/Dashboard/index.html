@@ -6,18 +6,21 @@
     <title>Sunil Africa EMS - Command Center</title>
     <style>
         :root {
-            --bg-main: #0B0E14;
-            --bg-card: #141923;
-            --accent-blue: #2563EB;
-            --accent-green: #10B981;
-            --accent-orange: #F59E0B;
-            --text-primary: #F3F4F6;
-            --text-secondary: #9CA3AF;
-            --border-color: #1F2937;
+            --bg-main: #F3F3F3; /* Windows 11 Desktop Background Light */
+            --bg-card: #FFFFFF; /* Solid Layered Elements */
+            --sidebar-bg: rgba(243, 243, 243, 0.85);
+            --accent-blue: #0067B8; /* Windows 11 Brand Blue */
+            --accent-green: #10857F; 
+            --accent-orange: #D83B01;
+            --text-primary: #202020; /* High Contrast Neutral Dark */
+            --text-secondary: #5F5F5F;
+            --border-color: #E5E5E5; /* Subtle Light Border splitters */
+            --radius-input: 4px;
+            --radius-card: 8px;
         }
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI Variable Display', 'Segoe UI', Tahoma, sans-serif;
             background-color: var(--bg-main);
             color: var(--text-primary);
             display: flex;
@@ -26,66 +29,75 @@
         }
         .sidebar {
             width: 260px;
-            background-color: var(--bg-card);
+            background-color: var(--sidebar-bg);
+            backdrop-filter: blur(20px);
             border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            padding: 20px;
+            padding: 24px 16px;
         }
         .sidebar h2 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 30px;
+            margin-bottom: 24px;
+            padding-left: 8px;
+        }
+        .nav-item {
+            padding: 10px 12px;
+            border-radius: var(--radius-input);
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 10px;
+            transition: background-color 0.15s ease;
         }
-        .nav-item {
-            padding: 12px 15px;
-            border-radius: 6px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin-bottom: 5px;
-            transition: all 0.2s ease;
+        .nav-item:hover {
+            background-color: rgba(0, 0, 0, 0.05);
         }
-        .nav-item:hover, .nav-item.active {
-            background-color: var(--accent-blue);
-            color: #FFF;
+        .nav-item.active {
+            background-color: rgba(0, 103, 184, 0.1);
+            color: var(--accent-blue);
+            font-weight: 600;
         }
         .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-            padding: 30px;
+            padding: 32px;
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
         }
-        .header-panel {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
+        .header-panel h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 0 0 4px 0;
         }
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
         }
         .card {
             background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: var(--radius-card);
             padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
         }
         .card-title {
             color: var(--text-secondary);
             font-size: 0.85rem;
-            text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .card-value {
-            font-size: 1.8rem;
-            font-weight: bold;
+            font-size: 1.75rem;
+            font-weight: 600;
         }
         .card-value.blue { color: var(--accent-blue); }
         .card-value.green { color: var(--accent-green); }
@@ -94,29 +106,32 @@
         .data-layout {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 20px;
+            gap: 16px;
         }
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
         }
         .data-table th, .data-table td {
-            padding: 12px;
+            padding: 10px 12px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
         }
         .data-table th {
             color: var(--text-secondary);
             font-weight: 600;
+            background-color: rgba(0, 0, 0, 0.02);
         }
         .badge {
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 2px 8px;
+            border-radius: 12px;
             font-size: 0.75rem;
-            font-weight: 600;
         }
-        .badge.success { background-color: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+        .badge.success { 
+            background-color: #DFF6DD; 
+            color: #107C41; 
+        }
     </style>
 </head>
 <body>
@@ -130,10 +145,8 @@
     </div>
     <div class="main-content">
         <div class="header-panel">
-            <div>
-                <h1 style="margin:0; font-size: 1.75rem;">Enterprise Dashboard</h1>
-                <span style="color: var(--text-secondary);">Sunil Africa Medical Supplies Real-time Monitoring Node</span>
-            </div>
+            <h1>Enterprise Dashboard</h1>
+            <div style="color: var(--text-secondary); font-size: 0.9rem;">Sunil Africa Medical Supplies • Node Live</div>
         </div>
         <div class="metrics-grid">
             <div class="card">
@@ -151,7 +164,7 @@
         </div>
         <div class="data-layout">
             <div class="card">
-                <div class="card-title">Recent Stock Movements</div>
+                <div class="card-title" style="margin-bottom:12px; font-weight:600;">Recent Stock Movements</div>
                 <table class="data-table">
                     <thead>
                         <tr>
@@ -178,10 +191,10 @@
                 </table>
             </div>
             <div class="card">
-                <div class="card-title">Cold Chain Monitoring Nodes</div>
-                <div style="margin-top: 15px; font-size: 0.9rem;">
-                    <p>🟢 Freezer Unit Alpha: <b>-18.4°C</b></p>
-                    <p>🟢 Refrigerator Unit Beta: <b>4.2°C</b></p>
+                <div class="card-title" style="margin-bottom:12px; font-weight:600;">Cold Chain Runtimes</div>
+                <div style="font-size: 0.9rem; line-height: 1.8;">
+                    <div>🟢 Freezer Unit Alpha: <b style="color:#10857F;">-18.4°C</b></div>
+                    <div>🟢 Refrigerator Unit Beta: <b style="color:#10857F;">4.2°C</b></div>
                 </div>
             </div>
         </div>
