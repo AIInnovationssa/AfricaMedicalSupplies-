@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunil Africa EMS - Command Center</title>
+    <style>
+        :root {
+            --bg-main: #0B0E14;
+            --bg-card: #141923;
+            --accent-blue: #2563EB;
+            --accent-green: #10B981;
+            --accent-orange: #F59E0B;
+            --text-primary: #F3F4F6;
+            --text-secondary: #9CA3AF;
+            --border-color: #1F2937;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .sidebar h2 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-item {
+            padding: 12px 15px;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 5px;
+            transition: all 0.2s ease;
+        }
+        .nav-item:hover, .nav-item.active {
+            background-color: var(--accent-blue);
+            color: #FFF;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 30px;
+        }
+        .header-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .card-title {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .card-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .card-value.blue { color: var(--accent-blue); }
+        .card-value.green { color: var(--accent-green); }
+        .card-value.orange { color: var(--accent-orange); }
+        
+        .data-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .data-table th, .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .data-table th {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge.success { background-color: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>🌍 Sunil Africa EMS</h2>
+        <a href="#" class="nav-item active">🎛️ Command Center</a>
+        <a href="#" class="nav-item">📦 Inventory Core</a>
+        <a href="#" class="nav-item">🩺 Cold Chain Monitor</a>
+        <a href="#" class="nav-item">🧾 Procurement</a>
+        <a href="#" class="nav-item">💼 General Ledger</a>
+    </div>
+    <div class="main-content">
+        <div class="header-panel">
+            <div>
+                <h1 style="margin:0; font-size: 1.75rem;">Enterprise Dashboard</h1>
+                <span style="color: var(--text-secondary);">Sunil Africa Medical Supplies Real-time Monitoring Node</span>
+            </div>
+        </div>
+        <div class="metrics-grid">
+            <div class="card">
+                <div class="card-title">Active Inventory SKU Count</div>
+                <div class="card-value blue">3,432</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Total Quarterly Valuation</div>
+                <div class="card-value green">$532,000</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Cold Chain Thermal Alarms</div>
+                <div class="card-value orange">0 Active</div>
+            </div>
+        </div>
+        <div class="data-layout">
+            <div class="card">
+                <div class="card-title">Recent Stock Movements</div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Item Name</th>
+                            <th>Destination Node</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TXN-9021</td>
+                            <td>Vaccine Cold Pack B3</td>
+                            <td>Kampala Central Depot</td>
+                            <td><span class="badge success">Dispatched</span></td>
+                        </tr>
+                        <tr>
+                            <td>TXN-9022</td>
+                            <td>Surgical Gloves Sterile</td>
+                            <td>Entebbe Regional Node</td>
+                            <td><span class="badge success">Dispatched</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card">
+                <div class="card-title">Cold Chain Monitoring Nodes</div>
+                <div style="margin-top: 15px; font-size: 0.9rem;">
+                    <p>🟢 Freezer Unit Alpha: <b>-18.4°C</b></p>
+                    <p>🟢 Refrigerator Unit Beta: <b>4.2°C</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
