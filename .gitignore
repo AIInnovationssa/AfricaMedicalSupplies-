@@ -1,0 +1,4 @@
+Database/SQLite/*.db
+Logs/*
+*.log
+.public
